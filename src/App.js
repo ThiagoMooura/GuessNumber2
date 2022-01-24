@@ -13,7 +13,7 @@ export default function App() {
   };
 
   const [num1, setNum1] = useState("");
-  const [resposta, setResposta] = useState("");
+  const [resposta, setResposta] = useState("⠀");
   const [tentativas, setTentativas] = useState(0)
 
   const [estado, setEstado] = useState('INICIO')
@@ -59,12 +59,11 @@ export default function App() {
 
   const enter = (e) => {
     if (e.key === "Enter") {
-      mm();
-      
+      verificacao();
     }
   };
 
-  const mm = () => {
+  const verificacao = () => {
     setNum1("");
     if (num1 < random) {
       setResposta(`+ ${num1}`);
@@ -82,28 +81,33 @@ export default function App() {
 
   if(estado == 'JOGO'){
   return (
-    <div className="jogo">
-      <div className="logo">
-            <img src={Logo} alt="" />
-      </div>
+    <section className="jogo">
 
-      <div className="jogo-wrap">
-        <div className="input-wrap">
-          <input
-            type="text"
-            value={num1}
-            onKeyDown={enter}
-            onChange={(e) => {
-              setNum1(e.target.value);
-            }}
-            placeholder='Digite um numero'
-          />
-          <button onClick={mm}>enviar</button>
+      <div className="full-wrap">
+        <div className="logo alt">
+              <img src={Logo} alt="" />
+        </div>
+
+        <div className="jogo-wrap">
+          <div className="input-wrap">
+            <input
+              type="text"
+              value={num1}
+              onKeyDown={enter}
+              onChange={(e) => {
+                setNum1(e.target.value);
+              }}
+              placeholder='Seu palpite'
+            />
+            <button className='send' onClick={verificacao}>Enviar</button>
           </div>
-        <h1>{resposta}</h1>
+          <div className="resposta">
+            <h1>{resposta}</h1>
+            </div>
+        </div>
       </div>
 
-    </div>
+    </section>
   );
 }
 
